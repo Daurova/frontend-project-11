@@ -21,3 +21,7 @@ This repository is created and maintained by the team and the community of Hexle
 See most active contributors on [hexlet-friends](https://friends.hexlet.io/).
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/Daurova/frontend-project-11/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Daurova/frontend-project-11/actions)
+
+[![Lint Status](https://github.com/(https://github.com/Daurova/frontend-project-11/actions/workflows/lint.yml/badge.svg)](https://github.com/frontend-project-11/actions/workflows/lint.yml)
+
+[Сайт](https://frontend-project-11-lime-three.vercel.app/)

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,18 +9,20 @@
 <body>
     <div class="container mt-5">
         <h1>RSS Reader</h1>
+        <div>Начните читать RSS сегодня! Это легко, это красиво.</div>
         <form id="rss-form">
             <div class="mb-3">
                 <input 
-                    type="url" 
+                    type="text" 
                     class="form-control" 
                     id="rss-url" 
-                    placeholder="Введите URL RSS-потока"
+                    placeholder="Ссылка RSS"
                     required
                 >
             </div>
-            <button type="submit" class="btn btn-primary">Добавить RSS</button>
+            <button type="submit" class="btn btn-primary" id = "btn">Добавить</button>
         </form>
+        <div>Пример: https://lorem-rss.hexlet.app/feed</div>
     </div>
     <script type="module" src="/src/main.js"></script>
 </body>
