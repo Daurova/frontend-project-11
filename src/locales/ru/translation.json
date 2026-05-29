@@ -1,0 +1,11 @@
+{
+    "slogan": "Начните читать RSS сегодня! Это легко, это красиво",
+    "inputPlaceholder": "Ссылка RSS",
+    "buttonText": "Добавить",
+    "buttonLoadingText": "Добавление",
+    "errorMessage": "Ссылка должна быть валидным URL",
+    "errorEmptyInputMessage": "Не должно быть пустым",
+    "errorNotUniqueMessage": "RSS уже существует",
+    "successMessage": "RSS  загружен!",
+    "example":"Пример: https://lorem-rss.hexlet.app/feed"
+}

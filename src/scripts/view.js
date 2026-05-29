@@ -1,3 +1,4 @@
+import i18next from '../i18n.js'
 import { subscribe } from 'valtio/vanilla';
 import { state } from './state.js';
 import { addRssFeed } from './model.js';
@@ -10,7 +11,8 @@ const submitButton = document.getElementById('btn');
 console.log('🔷 view.js загружен');
 
 const renderForm = () => {
-  console.log('🎨 renderForm вызван');
+  const existingFeedbacks = urlInput.parentNode.querySelectorAll('.invalid-feedback, .valid-feedback, .success');
+  existingFeedbacks.forEach(el => el.remove());  
 
   if (urlInput.value !== state.form.url) {
     urlInput.value = state.form.url;
@@ -25,7 +27,7 @@ const renderForm = () => {
       errorDiv.className = 'invalid-feedback';
       urlInput.parentNode.insertBefore(errorDiv, urlInput.nextSibling);
     }
-    errorDiv.textContent = state.form.errorMessage;
+    errorDiv.textContent = i18next.t(state.form.errorMessage);
   } else {
     urlInput.classList.remove('is-invalid');
     const errorDiv = urlInput.nextElementSibling;
@@ -36,10 +38,10 @@ const renderForm = () => {
   
   if (state.form.isSubmitting) {
     submitButton.disabled = true;
-    submitButton.textContent = 'Добавление...';
+    submitButton.textContent = i18next.t('buttonLoadingText')
   } else {
     submitButton.disabled = false;
-    submitButton.textContent = 'Добавить';
+    submitButton.textContent = i18next.t('buttonText');
   }
 
   if (state.form.isSuccess) {
@@ -48,44 +50,49 @@ const renderForm = () => {
     successDiv.classList.add('success') 
     console.log(state.form.isSuccess)
     urlInput.parentNode.insertBefore(successDiv, urlInput.nextSibling);
-    successDiv.textContent = 'RSS успешно загружен'
+    successDiv.textContent = i18next.t('successMessage')
 
   }
+
+document.getElementById('slogan').textContent = i18next.t('slogan');
+document.getElementById('example').textContent = i18next.t('example');
+urlInput.placeholder = i18next.t('inputPlaceholder');
 };
 
 subscribe(state, () => {
-  console.log('🔔 SUBSCRIBE сработал');
   renderForm();
 });
 
 form.addEventListener('submit', (event) => {
-  console.log('📤 1. Событие submit произошло');
   event.preventDefault();
   
   const url = urlInput.value.trim();
-  console.log('📤 2. Получен URL:', url);
-  
-  console.log('📤 3. Сохраняю в state.form.url');
+ 
   state.form.url = url;
   
   if (!url) {
-    console.log('📤 4. URL пустой → устанавливаю ошибку');
     state.form.isValid = false;
-    state.form.errorMessage = 'Не должно быть пустым';
-    console.log('📤 5. Выход из обработчика (return)');
+    state.form.errorMessage =  'errorEmptyInputMessage';
     return;
   }
   
-  console.log('📤 6. URL не пустой, сейчас вызову addRssFeed');
-  console.log('📤 7. Вызов addRssFeed с аргументом:', url);
+ 
   
-  // Проверка, что addRssFeed определена
-  console.log('📤 8. Тип addRssFeed:', typeof addRssFeed);
   
   const result = addRssFeed(url);
   console.log('📤 9. addRssFeed вернула:', result);
   
   console.log('📤 10. Обработчик submit завершен');
+});
+
+document.getElementById('lang-ru').addEventListener('click', () => {
+  i18next.changeLanguage('ru');
+  renderForm(); // перерендер
+});
+
+document.getElementById('lang-en').addEventListener('click', () => {
+  i18next.changeLanguage('en');
+  renderForm();
 });
 
 urlInput.focus();

@@ -1,43 +1,35 @@
-import { state } from "./state";
-import { validateUrl } from "./validator";
+import { validateUrl } from './validator.js';
+import { state } from './state.js';
 
 export const addRssFeed = (url) => {
+  console.log('🟢 addRssFeed НАЧАЛО, url =', url);
+  console.log('   текущий state.form.isSubmitting =', state.form.isSubmitting);
+  state.form.isSubmitting = true;
 
-    console.log('🟢🟢🟢 model.addRssFeed ВЫЗВАНА с url:', url);
-  console.log('🟢 Тип аргумента url:', typeof url);
-  console.log('🟢 Длина url:', url.length);
-    state.form.isValid = true
-    state.form.errorMessage =''
-    state.form.isSubmitting = true
-    return validateUrl(url, state.feeds)
-      .then(()=>{
-    console.log('УСПЕХ');
-
-
-        const newFeed = {
-            id: Date.now(), 
-            url: url,
-            title: `RSS Feed ${url}`
-        }
-
-        state.feeds.push(newFeed)
-
-        state.form.url = ''
-        state.form.isValid = true
-        state.form.errorMessage = ''
-        state.form.isSubmitting = false
-        state.form.isSuccess = true
-        console.log('RSS добавлен:', newFeed);
-
-        setTimeout(()=>{
-            state.form.isSuccess = false
-        }, 2000)
+  return validateUrl(url, state.feeds)
+    .then(() => {
+      console.log('✅ validateUrl УСПЕХ');
+      state.feeds.push({ id: Date.now(), url });
+      state.form.url = '';
+      state.form.isValid = true;
+      state.form.errorMessage = '';
+      state.form.isSuccess = true;
+      state.form.isSubmitting = false;
+      console.log('   success: isSuccess = true, isSubmitting = false');
+      setTimeout(() => {
+        state.form.isSuccess = false;
+        console.log('   success message auto-hidden');
+      }, 2000);
     })
-    .catch((e)=>{
-        state.form.isValid = false
-        state.form.errorMessage = e.message
-        state.form.isSubmitting = false
-
-        console.error('Ошибка валидации', e.message)
-    }) 
-}
+    .catch((err) => {
+      console.log('❌ validateUrl ОШИБКА:', err);
+      console.log('   err.type =', err.type);
+      state.form.isValid = false;
+      if (err.type === 'required') state.form.errorMessage = 'errorEmptyInputMessage';
+      else if (err.type === 'url') state.form.errorMessage = 'errorMessage';
+      else if (err.type === 'unique') state.form.errorMessage = 'errorNotUniqueMessage';
+      else state.form.errorMessage = 'errorMessage';
+      state.form.isSubmitting = false;
+      console.log('   после обработки: errorMessage =', state.form.errorMessage);
+    });
+};

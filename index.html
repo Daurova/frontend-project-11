@@ -8,21 +8,24 @@
 </head>
 <body>
     <div class="container mt-5">
+        <div class="mb-3">
+          <button class="btn btn-sm btn-outline-secondary" id="lang-ru">RU</button>
+          <button class="btn btn-sm btn-outline-secondary" id="lang-en">EN</button>
+        </div>        
         <h1>RSS Reader</h1>
-        <div>Начните читать RSS сегодня! Это легко, это красиво.</div>
-        <form id="rss-form">
+        <div id = 'slogan'>Начните читать RSS сегодня! Это легко, это красиво.</div>
+        <form id="rss-form" novalidate>
             <div class="mb-3">
                 <input 
                     type="text" 
                     class="form-control" 
                     id="rss-url" 
-                    placeholder="Ссылка RSS"
                     required
                 >
             </div>
             <button type="submit" class="btn btn-primary" id = "btn">Добавить</button>
         </form>
-        <div>Пример: https://lorem-rss.hexlet.app/feed</div>
+        <div id = 'example'>Пример: https://lorem-rss.hexlet.app/feed</div>
     </div>
     <script type="module" src="/src/main.js"></script>
 </body>

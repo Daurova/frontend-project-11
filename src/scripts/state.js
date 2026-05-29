@@ -9,5 +9,6 @@ export const state = proxy({
         isSubmitting: false,
         isSuccess: false,
 
-    }
+    }, 
+    language: 'ru',
 })
