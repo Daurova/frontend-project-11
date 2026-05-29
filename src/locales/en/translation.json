@@ -7,5 +7,9 @@
     "errorEmptyInputMessage": "Should not be empty",
     "errorNotUniqueMessage": "RSS already exists",
     "successMessage": "RSS is added",
-    "example":"Example: https://lorem-rss.hexlet.app/feed"
+    "example":"Example: https://lorem-rss.hexlet.app/feed",
+    "networkError": "Network error. Please try again later.",
+    "invalidRss": "Invalid RSS feed.",
+    "feedsTitle": "Feeds",
+    "postsTitle": "Posts"
 }

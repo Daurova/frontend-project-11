@@ -7,5 +7,9 @@
     "errorEmptyInputMessage": "Не должно быть пустым",
     "errorNotUniqueMessage": "RSS уже существует",
     "successMessage": "RSS  загружен!",
-    "example":"Пример: https://lorem-rss.hexlet.app/feed"
+    "example":"Пример: https://lorem-rss.hexlet.app/feed",
+    "networkError": "Ошибка сети. Попробуйте позже.",
+    "invalidRss": "Некорректный RSS-поток.",
+    "feedsTitle": "Фиды",
+    "postsTitle": "Посты"
 }
