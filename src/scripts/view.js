@@ -59,9 +59,6 @@ document.getElementById('example').textContent = i18next.t('example');
 urlInput.placeholder = i18next.t('inputPlaceholder');
 };
 
-subscribe(state, () => {
-  renderForm();
-});
 
 form.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -93,7 +90,46 @@ document.getElementById('lang-ru').addEventListener('click', () => {
 document.getElementById('lang-en').addEventListener('click', () => {
   i18next.changeLanguage('en');
   renderForm();
+  document.querySelector('[data-i18n="feedsTitle"]').textContent = i18next.t('feedsTitle');
+document.querySelector('[data-i18n="postsTitle"]').textContent = i18next.t('postsTitle')
 });
 
+const renderFeedsAndPosts = () => {
+  const feedsContainer = document.getElementById('feeds-container');
+  const postsContainer = document.getElementById('posts-container');
+
+  feedsContainer.innerHTML = state.feeds.map(feed => `
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">${escapeHtml(feed.title)}</h5>
+        <p class="card-text">${escapeHtml(feed.description)}</p>
+      </div>
+    </div>
+  `).join('');
+
+  postsContainer.innerHTML = state.posts.map(post => `
+    <div class="mb-2">
+      <a href="${escapeHtml(post.link)}" target="_blank" rel="noopener noreferrer">
+        ${escapeHtml(post.title)}
+      </a>
+    </div>
+  `).join('');
+};
+
+// Функция для защиты от XSS
+function escapeHtml(str) {
+  if (!str) return '';
+  return str.replace(/[&<>]/g, function(m) {
+    if (m === '&') return '&amp;';
+    if (m === '<') return '&lt;';
+    if (m === '>') return '&gt;';
+    return m;
+  });
+}
+subscribe(state, () => {
+  renderForm();
+  renderFeedsAndPosts();
+});
 urlInput.focus();
 renderForm();
+renderFeedsAndPosts();
