@@ -11,5 +11,6 @@
     "networkError": "Network error. Please try again later.",
     "invalidRss": "Invalid RSS feed.",
     "feedsTitle": "Feeds",
-    "postsTitle": "Posts"
+    "postsTitle": "Posts",
+    "buttonViewPosts": "View"
 }

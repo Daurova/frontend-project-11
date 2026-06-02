@@ -9,6 +9,7 @@ export const fetchRssFeed = (url) => {
     if (response.data.status?.http_code !== 200) {
       throw new Error('Network error');
     }
+    console.log('response',response.data.content)
     return response.data.contents;
   });
 };

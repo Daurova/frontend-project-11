@@ -85,18 +85,23 @@ form.addEventListener('submit', (event) => {
 document.getElementById('lang-ru').addEventListener('click', () => {
   i18next.changeLanguage('ru');
   renderForm(); // перерендер
+  renderFeedsAndPosts()
 });
 
 document.getElementById('lang-en').addEventListener('click', () => {
   i18next.changeLanguage('en');
   renderForm();
-  document.querySelector('[data-i18n="feedsTitle"]').textContent = i18next.t('feedsTitle');
-document.querySelector('[data-i18n="postsTitle"]').textContent = i18next.t('postsTitle')
+  renderFeedsAndPosts()
+  
 });
 
 const renderFeedsAndPosts = () => {
   const feedsContainer = document.getElementById('feeds-container');
   const postsContainer = document.getElementById('posts-container');
+  const viewPostsButton = document.getElementById('btn-view-posts')
+  
+  document.querySelector('[data-i18n="feedsTitle"]').textContent = i18next.t('feedsTitle');
+  document.querySelector('[data-i18n="postsTitle"]').textContent = i18next.t('postsTitle')
 
   feedsContainer.innerHTML = state.feeds.map(feed => `
     <div class="card mb-3">
@@ -114,6 +119,9 @@ const renderFeedsAndPosts = () => {
       </a>
     </div>
   `).join('');
+    
+  viewPostsButton.textContent = i18next.t('buttonViewPosts') 
+
 };
 
 // Функция для защиты от XSS
