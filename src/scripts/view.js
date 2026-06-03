@@ -2,11 +2,14 @@ import i18next from '../i18n.js'
 import { subscribe } from 'valtio/vanilla';
 import { state } from './state.js';
 import { addRssFeed } from './model.js';
+import { Modal } from 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
 
 // DOM элементы
 const form = document.getElementById('rss-form');
 const urlInput = document.getElementById('rss-url');
 const submitButton = document.getElementById('btn');
+const viewPostsButton = document.getElementById('btn-view-posts')
 
 console.log('🔷 view.js загружен');
 
@@ -98,7 +101,6 @@ document.getElementById('lang-en').addEventListener('click', () => {
 const renderFeedsAndPosts = () => {
   const feedsContainer = document.getElementById('feeds-container');
   const postsContainer = document.getElementById('posts-container');
-  const viewPostsButton = document.getElementById('btn-view-posts')
   
   document.querySelector('[data-i18n="feedsTitle"]').textContent = i18next.t('feedsTitle');
   document.querySelector('[data-i18n="postsTitle"]').textContent = i18next.t('postsTitle')
@@ -123,6 +125,31 @@ const renderFeedsAndPosts = () => {
   viewPostsButton.textContent = i18next.t('buttonViewPosts') 
 
 };
+
+viewPostsButton.addEventListener('click', () => {
+  // Наполняем модальное окно актуальными постами
+  const modalBody = document.getElementById('postsModalBody');
+  const modalHeader  = document.getElementById('postsModalHeader')
+
+  modalHeader.textContent = i18next.t('postsTitle')
+  if (state.posts.length === 0) {
+    modalBody.innerHTML = '<p>Нет загруженных постов.</p>';
+  } else {
+    const postsList = state.posts.map(post => `
+      <div class="mb-2">
+        <a href="${escapeHtml(post.link)}" target="_blank" rel="noopener noreferrer">
+          ${escapeHtml(post.title)}
+        </a>
+      </div>
+    `).join('');
+    modalBody.innerHTML = postsList;
+  }
+
+  // Открываем модалку с помощью Bootstrap
+  const modalElement = document.getElementById('postsModal');
+  const modal = new Modal(modalElement);
+  modal.show();
+});
 
 // Функция для защиты от XSS
 function escapeHtml(str) {
