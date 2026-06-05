@@ -9,7 +9,6 @@ import { Modal } from 'bootstrap/dist/js/bootstrap.bundle.min.js';
 const form = document.getElementById('rss-form');
 const urlInput = document.getElementById('rss-url');
 const submitButton = document.getElementById('btn');
-const viewPostsButton = document.getElementById('btn-view-posts')
 
 console.log('🔷 view.js загружен');
 
@@ -119,15 +118,14 @@ const renderFeedsAndPosts = () => {
       <a href="${escapeHtml(post.link)}" target="_blank" rel="noopener noreferrer">
         ${escapeHtml(post.title)}
       </a>
+      <button class = 'btn-view-posts'>${i18next.t('buttonViewPosts')}</button>
     </div>
   `).join('');
-    
-  viewPostsButton.textContent = i18next.t('buttonViewPosts') 
+   const viewPostsButtons = document.querySelectorAll('.btn-view-posts')
+   console.log(viewPostsButtons, 'buttons')
 
-};
-
-viewPostsButton.addEventListener('click', () => {
-  // Наполняем модальное окно актуальными постами
+viewPostsButtons.forEach(button => button.addEventListener('click', () => {
+  // Наполняем модальное окно актуальными постами TODO: настроить вывод одного поста
   const modalBody = document.getElementById('postsModalBody');
   const modalHeader  = document.getElementById('postsModalHeader')
 
@@ -149,7 +147,7 @@ viewPostsButton.addEventListener('click', () => {
   const modalElement = document.getElementById('postsModal');
   const modal = new Modal(modalElement);
   modal.show();
-});
+}));
 
 // Функция для защиты от XSS
 function escapeHtml(str) {
@@ -161,6 +159,9 @@ function escapeHtml(str) {
     return m;
   });
 }
+};
+
+
 subscribe(state, () => {
   renderForm();
   renderFeedsAndPosts();
