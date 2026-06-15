@@ -55,6 +55,7 @@ const renderForm = () => {
 
   }
 
+document.getElementById('title').textContent = i18next.t('title')  
 document.getElementById('slogan').textContent = i18next.t('slogan');
 document.getElementById('example').textContent = i18next.t('example');
 urlInput.placeholder = i18next.t('inputPlaceholder');
