@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="/src/styles.css">
 </head>
 <body>
-    <div class="container mt-5">
-        <div class="mb-3">
+    <div class="container  bg-second">
+        <div class="">
           <button class="btn btn-sm btn-outline-secondary" id="lang-ru">RU</button>
           <button class="btn btn-sm btn-outline-secondary" id="lang-en">EN</button>
         </div>        
@@ -26,35 +26,19 @@
             <button type="submit" class="btn btn-primary" id = "btn">Добавить</button>
         </form>
         <div id = 'example'>Пример: https://lorem-rss.hexlet.app/feed</div>
-        <div class="row">
-    <div class="col-md-6">
-      <h2 data-i18n="feedsTitle">Фиды</h2>
-      <div id="feeds-container"></div>
-    </div>
-    <div class="col-md-6">
+    <div class="row bg-main font-main">
+   
+    <div class="col-md-8">
       <h2 data-i18n="postsTitle">Посты</h2>
       <!-- <button id = 'btn-view-posts'></button> -->
       <div id="posts-container"></div>
     </div>
+     <div class="col-md-4">
+      <h2 data-i18n="feedsTitle">Фиды</h2>
+      <div id="feeds-container" class="font-main"></div>
+    </div>
   </div>
     </div>
     <script type="module" src="/src/main.js"></script>
-    <!-- Модальное окно -->
-<div class="modal fade" id="postsModal" tabindex="-1" aria-labelledby="postsModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="postsModalHeader"></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
-      </div>
-      <div class="modal-body" id="postsModalBody">
-        <!-- Здесь динамически будут отображаться посты -->
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id = 'btn-modal-close'>Закрыть</button>
-      </div>
-    </div>
-  </div>
-</div>
 </body>
 </html>

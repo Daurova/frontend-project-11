@@ -104,10 +104,10 @@ const renderFeedsAndPosts = () => {
   document.querySelector('[data-i18n="postsTitle"]').textContent = i18next.t('postsTitle')
 
   feedsContainer.innerHTML = state.feeds.map(feed => `
-    <div class="card mb-3">
-      <div class="card-body">
-        <h5 class="card-title">${escapeHtml(feed.title)}</h5>
-        <p class="card-text">${escapeHtml(feed.description)}</p>
+    <div class=" mb-3">
+      <div class="">
+        <h5 class="">${escapeHtml(feed.title)}</h5>
+        <p class="">${escapeHtml(feed.description)}</p>
       </div>
     </div>
   `).join('');
