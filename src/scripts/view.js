@@ -2,7 +2,6 @@ import i18next from '../i18n.js'
 import { subscribe } from 'valtio/vanilla';
 import { state } from './state.js';
 import { addRssFeed } from './model.js';
-import { Modal } from 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 
 // DOM элементы
@@ -118,37 +117,23 @@ const renderFeedsAndPosts = () => {
       <a href="${escapeHtml(post.link)}" target="_blank" rel="noopener noreferrer">
         ${escapeHtml(post.title)}
       </a>
-      <button class = 'btn-view-posts'>${i18next.t('buttonViewPosts')}</button>
+      <button class = 'btn-view-posts' id = ${post.id}>${i18next.t('buttonViewPosts')}</button>
     </div>
   `).join('');
    const viewPostsButtons = document.querySelectorAll('.btn-view-posts')
    console.log(viewPostsButtons, 'buttons')
 
 viewPostsButtons.forEach(button => button.addEventListener('click', () => {
-  // Наполняем модальное окно актуальными постами TODO: настроить вывод одного поста
-  const modalBody = document.getElementById('postsModalBody');
-  const modalHeader  = document.getElementById('postsModalHeader')
 
-  modalHeader.textContent = i18next.t('postsTitle')
-  if (state.posts.length === 0) {
-    modalBody.innerHTML = '<p>Нет загруженных постов.</p>';
-  } else {
-    const postsList = state.posts.map(post => `
-      <div class="mb-2">
-        <a href="${escapeHtml(post.link)}" target="_blank" rel="noopener noreferrer">
-          ${escapeHtml(post.title)}
-        </a>
-      </div>
-    `).join('');
-    modalBody.innerHTML = postsList;
-  }
+    const postToRender = state.posts.filter(post => post.id === button.id)
+    console.log(postToRender, 'posttorender', button)
 
-  // Открываем модалку с помощью Bootstrap
-  const modalElement = document.getElementById('postsModal');
-  const modal = new Modal(modalElement);
-  modal.show();
+    window.open(postToRender[0].link, '_blank');
+
 }));
 
+
+console.log(state.posts[0])
 // Функция для защиты от XSS
 function escapeHtml(str) {
   if (!str) return '';
