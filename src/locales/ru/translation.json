@@ -13,6 +13,9 @@
     "invalidRss": "Некорректный RSS-поток.",
     "feedsTitle": "Фиды",
     "postsTitle": "Посты",
-    "buttonViewPosts": "Просмотр"
+    "buttonViewPosts": "Просмотр",
+    "noDescription": "Нет описания",
+    "buttonClose": "Закрыть",
+    "buttonReadAll" : "Читать полностью"
 
 }

@@ -13,5 +13,9 @@
     "invalidRss": "Invalid RSS feed.",
     "feedsTitle": "Feeds",
     "postsTitle": "Posts",
-    "buttonViewPosts": "View"
+    "buttonViewPosts": "View",
+    "noDescription": "No description",
+    "buttonClose": "Close",
+    "buttonReadAll" : "Read All"
+
 }

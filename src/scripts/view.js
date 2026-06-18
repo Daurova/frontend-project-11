@@ -2,12 +2,14 @@ import i18next from '../i18n.js'
 import { subscribe } from 'valtio/vanilla';
 import { state } from './state.js';
 import { addRssFeed } from './model.js';
+import { Modal } from 'bootstrap';
 
 
 // DOM элементы
 const form = document.getElementById('rss-form');
 const urlInput = document.getElementById('rss-url');
 const submitButton = document.getElementById('btn');
+const modal = new Modal(document.getElementById('modal-posts'))
 
 console.log('🔷 view.js загружен');
 
@@ -115,7 +117,7 @@ const renderFeedsAndPosts = () => {
 
   postsContainer.innerHTML = state.posts.map(post => `
     <div class="mb-2">
-      <a href="${escapeHtml(post.link)}" target="_blank" rel="noopener noreferrer">
+      <a href="${escapeHtml(post.link)}" target="_blank" rel="noopener noreferrer" class="${post.isVisited ? 'fw-normal': 'fw-bold'}">
         ${escapeHtml(post.title)}
       </a>
       <button class = 'btn-view-posts' id = ${post.id}>${i18next.t('buttonViewPosts')}</button>
@@ -126,11 +128,18 @@ const renderFeedsAndPosts = () => {
 
 viewPostsButtons.forEach(button => button.addEventListener('click', () => {
 
-    const postToRender = state.posts.filter(post => post.id === button.id)
+    const postToRender = state.posts.filter(post => post.id === button.id)[0]
     console.log(postToRender, 'posttorender', button)
+    document.getElementById('modal-title').innerText = postToRender.title
+    document.getElementById('modal-body').innerText = postToRender.description ? postToRender.description: i18next.t('noDescription')
+    const buttonReadAll = document.getElementById('btn-modal-readAll')
+    buttonReadAll.innerText = i18next.t('buttonReadAll')
+    buttonReadAll.addEventListener('click',()=>{window.open(postToRender.link)})
+    document.getElementById('btn-modal-close').innerText = i18next.t('buttonClose')
+    console.log(postToRender, 'posttorender', button)
+    postToRender.isVisited = true
 
-    window.open(postToRender[0].link, '_blank');
-
+    modal.show()
 }));
 
 

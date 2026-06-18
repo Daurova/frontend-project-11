@@ -30,7 +30,6 @@
    
     <div class="col-md-8">
       <h2 data-i18n="postsTitle">Посты</h2>
-      <!-- <button id = 'btn-view-posts'></button> -->
       <div id="posts-container"></div>
     </div>
      <div class="col-md-4">
@@ -39,6 +38,24 @@
     </div>
     </div>
     </div>
+    <!--Modal-->
+<div class="modal fade" tabindex="-1" id="modal-posts" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id = 'modal-title'>Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p id = 'modal-body'>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id = 'btn-modal-readAll'></button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id = 'btn-modal-close'></button>
+      </div>
+    </div>
+  </div>
+</div>
     <script type="module" src="/src/main.js"></script>
 </body>
 </html>
