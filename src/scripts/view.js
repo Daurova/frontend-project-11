@@ -117,7 +117,7 @@ const renderFeedsAndPosts = () => {
 
   postsContainer.innerHTML = state.posts.map(post => `
     <div class="mb-2">
-      <a href="${escapeHtml(post.link)}" target="_blank" rel="noopener noreferrer" class="${post.isVisited ? 'fw-normal': 'fw-bold'}">
+      <a href="${escapeHtml(post.link)}" target="_blank" rel="noopener noreferrer" class="${post.isVisited ? 'fw-normal link-secondary': 'fw-bold'}">
         ${escapeHtml(post.title)}
       </a>
       <button class = 'btn-view-posts' id = ${post.id}>${i18next.t('buttonViewPosts')}</button>
