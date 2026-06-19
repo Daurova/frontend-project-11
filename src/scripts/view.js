@@ -27,7 +27,7 @@ const renderForm = () => {
     let errorDiv = urlInput.nextElementSibling;
     if (!errorDiv || !errorDiv.classList.contains('invalid-feedback')) {
       errorDiv = document.createElement('div');
-      errorDiv.className = 'invalid-feedback';
+      errorDiv.className = 'invalid-feedback feedback';
       urlInput.parentNode.insertBefore(errorDiv, urlInput.nextSibling);
     }
     errorDiv.textContent = i18next.t(state.form.errorMessage);
@@ -50,7 +50,7 @@ const renderForm = () => {
   if (state.form.isSuccess) {
     // let successDiv = urlInput.nextElementSibling
    let successDiv = document.createElement('div');
-    successDiv.classList.add('success') 
+    successDiv.classList.add('success feedback') 
     console.log(state.form.isSuccess)
     urlInput.parentNode.insertBefore(successDiv, urlInput.nextSibling);
     successDiv.textContent = i18next.t('successMessage')

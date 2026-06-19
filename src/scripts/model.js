@@ -38,7 +38,7 @@ export const addRssFeed = (url) => {
       setTimeout(() => {
         state.form.isSuccess = false;
         console.log('   success message auto-hidden');
-      }, 2000);
+      }, 5000);
     })
     .catch((err) => {
       state.form.isValid = false;
