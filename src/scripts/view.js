@@ -14,7 +14,7 @@ const modal = new Modal(document.getElementById('modal-posts'))
 console.log('🔷 view.js загружен');
 
 const renderForm = () => {
-  const existingFeedbacks = urlInput.parentNode.querySelectorAll('.invalid-feedback, .valid-feedback, .success');
+  const existingFeedbacks = urlInput.parentNode.querySelectorAll('.invalid-feedback, .valid-feedback, .success .feedback');
   existingFeedbacks.forEach(el => el.remove());  
 
   if (urlInput.value !== state.form.url) {
