@@ -14,7 +14,8 @@ const modal = new Modal(document.getElementById('modal-posts'))
 console.log('🔷 view.js загружен');
 
 const renderForm = () => {
-  const existingFeedbacks = urlInput.parentNode.querySelectorAll('.invalid-feedback, .valid-feedback, .success .feedback');
+  console.log('🔁 renderForm, isSuccess:', state.form.isSuccess);
+  const existingFeedbacks = urlInput.parentNode.querySelectorAll('.invalid-feedback, .valid-feedback, .success , .feedback');
   existingFeedbacks.forEach(el => el.remove());  
 
   if (urlInput.value !== state.form.url) {
@@ -50,7 +51,7 @@ const renderForm = () => {
   if (state.form.isSuccess) {
     // let successDiv = urlInput.nextElementSibling
    let successDiv = document.createElement('div');
-    successDiv.classList.add('success feedback') 
+    successDiv.classList.add('success', 'feedback') 
     console.log(state.form.isSuccess)
     urlInput.parentNode.insertBefore(successDiv, urlInput.nextSibling);
     successDiv.textContent = i18next.t('successMessage')
