@@ -17,6 +17,7 @@ export const parseRss = (xmlString) => {
   const posts = Array.from(items).map(item => ({
     title: item.querySelector('title')?.textContent ?? 'No title',
     link: item.querySelector('link')?.textContent ?? '',
+    description: item.querySelector('description')?.textContent ?? '',
   }));
 
   return { feed: { title, description }, posts };

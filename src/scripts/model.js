@@ -26,6 +26,7 @@ export const addRssFeed = (url) => {
         feedId: newFeed.id,
         title: post.title,
         link: post.link,
+        description: post.description,
       }));
       state.posts.push(...postsWithFeedId);
 
