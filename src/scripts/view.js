@@ -115,7 +115,7 @@ const renderFeedsAndPosts = () => {
   feedsContainer.innerHTML = state.feeds.map(feed => `
     <div class=" mb-3">
       <div class="">
-        <h5 class="">${escapeHtml(feed.title)}</h5>
+        <h3 class="">${escapeHtml(feed.title)}</h3>
         <p class="">${escapeHtml(feed.description)}</p>
       </div>
     </div>
