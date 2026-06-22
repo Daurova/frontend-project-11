@@ -35,10 +35,10 @@ export const addRssFeed = (url) => {
       state.form.isSuccess = true;
       state.form.isSubmitting = false;
       console.log('   success: isSuccess = true, isSubmitting = false');
-      setTimeout(() => {
-        state.form.isSuccess = false;
-        console.log('   success message auto-hidden');
-      }, 5000);
+      // setTimeout(() => {
+      //   state.form.isSuccess = false;
+      //   console.log('   success message auto-hidden');
+      // }, 5000);
     })
     .catch((err) => {
       state.form.isValid = false;

@@ -16,7 +16,9 @@ console.log('🔷 view.js загружен');
 const renderForm = () => {
   console.log('🔁 renderForm, isSuccess:', state.form.isSuccess);
   const existingFeedbacks = urlInput.parentNode.querySelectorAll('.invalid-feedback, .valid-feedback, .success, .feedback');
+ console.log('existing feedbacks', existingFeedbacks)
   existingFeedbacks.forEach(el => el.remove());  
+console.log(existingFeedbacks, 'exising after remove')
 
   if (urlInput.value !== state.form.url) {
     urlInput.value = state.form.url;
@@ -49,6 +51,7 @@ const renderForm = () => {
   }
 
   if (state.form.isSuccess) {
+
     // let successDiv = urlInput.nextElementSibling
    let successDiv = document.createElement('div');
     successDiv.classList.add('success', 'feedback') 
@@ -68,6 +71,8 @@ urlInput.placeholder = i18next.t('inputPlaceholder');
 form.addEventListener('submit', (event) => {
   event.preventDefault();
   
+  state.form.isSuccess = false;
+
   const url = urlInput.value.trim();
  
   state.form.url = url;
