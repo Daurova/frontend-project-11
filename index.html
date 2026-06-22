@@ -31,24 +31,24 @@
    
     <div class="col-md-8">
       <h2 data-i18n="postsTitle">Посты</h2>
-      <div id="posts-container posts"></div>
+      <div id="posts-container" class = 'posts'></div>
     </div>
      <div class="col-md-4">
       <h2 data-i18n="feedsTitle">Фиды</h2>
-      <div id="feeds-container feeds" class="font-main"></div>
+      <div id="feeds-container" class="font-main feeds"></div>
     </div>
     </div>
     </div>
     <!--Modal-->
-<div class="modal fade" tabindex="-1" id="modal-posts" >
+<div class="modal fade" tabindex="-1" id="modal" >
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id = 'modal-title'>Modal title</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        <p id = 'modal-body'>Modal body text goes here.</p>
+      <div>
+        <p class="modal-body" id = 'modal-body'>Modal body text goes here.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" id = 'btn-modal-readAll'></button>

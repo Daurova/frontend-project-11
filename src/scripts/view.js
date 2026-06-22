@@ -9,7 +9,7 @@ import { Modal } from 'bootstrap';
 const form = document.getElementById('rss-form');
 const urlInput = document.getElementById('rss-url');
 const submitButton = document.getElementById('btn');
-const modal = new Modal(document.getElementById('modal-posts'))
+const modal = new Modal(document.getElementById('modal'))
 
 console.log('🔷 view.js загружен');
 
@@ -121,31 +121,46 @@ const renderFeedsAndPosts = () => {
     </div>
   `).join('');
 
-  postsContainer.innerHTML = state.posts.map(post => `
-    <div class="mb-2">
-      <a href="${escapeHtml(post.link)}" target="_blank" rel="noopener noreferrer" class="${post.isVisited ? 'fw-normal link-secondary': 'fw-bold'}">
-        ${escapeHtml(post.title)}
-      </a>
-      <button class = 'btn-view-posts' id = ${post.id}>${i18next.t('buttonViewPosts')}</button>
-    </div>
-  `).join('');
+ postsContainer.innerHTML = `
+  <div role="list" class="list-unstyled">
+    ${state.posts.map(post => `
+      <div role="listitem" class="mb-2 d-flex align-items-center gap-2">
+        <a href="${escapeHtml(post.link)}" target="_blank" rel="noopener noreferrer" class="${post.isVisited ? 'fw-normal link-secondary' : 'fw-bold'}">
+          ${escapeHtml(post.title)}
+        </a>
+        <button class="btn btn-sm btn-outline-primary btn-view-posts" data-post-id="${post.id}">
+          ${i18next.t('buttonViewPosts')}
+        </button>
+      </div>
+    `).join('')}
+  </div>
+`
    const viewPostsButtons = document.querySelectorAll('.btn-view-posts')
    console.log(viewPostsButtons, 'buttons')
 
 viewPostsButtons.forEach(button => button.addEventListener('click', () => {
-
-    const postToRender = state.posts.filter(post => post.id === button.id)[0]
-    console.log(postToRender, 'posttorender', button)
-    document.getElementById('modal-title').innerText = postToRender.title
-    document.getElementById('modal-body').innerText = postToRender.description ? postToRender.description: i18next.t('noDescription')
-    const buttonReadAll = document.getElementById('btn-modal-readAll')
-    buttonReadAll.innerText = i18next.t('buttonReadAll')
-    buttonReadAll.addEventListener('click',()=>{window.open(postToRender.link)})
-    document.getElementById('btn-modal-close').innerText = i18next.t('buttonClose')
-    console.log(postToRender, 'posttorender', button)
-    postToRender.isVisited = true
-
-    modal.show()
+    const postId = button.dataset.postId;  // вместо button.id
+    console.log('🔘 Клик по кнопке, postId:', postId);
+    
+    const postToRender = state.posts.find(post => post.id === postId);
+    if (!postToRender) {
+      console.error('❌ Пост не найден для id:', postId);
+      return;
+    }
+    
+    console.log('📄 Найден пост:', postToRender);
+    document.getElementById('modal-title').innerText = postToRender.title;
+    document.getElementById('modal-body').innerText = postToRender.description ? postToRender.description : '';
+    
+    const buttonReadAll = document.getElementById('btn-modal-readAll');
+    buttonReadAll.innerText = i18next.t('buttonReadAll');
+    // Убираем дублирующиеся обработчики – лучше назначить один раз
+    buttonReadAll.onclick = () => window.open(postToRender.link);
+    
+    document.getElementById('btn-modal-close').innerText = i18next.t('buttonClose');
+    postToRender.isVisited = true;
+    
+    modal.show();
 }));
 
 
