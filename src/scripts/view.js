@@ -139,12 +139,10 @@ const renderFeedsAndPosts = () => {
    console.log(viewPostsButtons, 'buttons')
 
 viewPostsButtons.forEach(button => button.addEventListener('click', () => {
-    const postId = button.dataset.postId;  // вместо button.id
-    console.log('🔘 Клик по кнопке, postId:', postId);
+    const postId = button.dataset.postId;  
     
     const postToRender = state.posts.find(post => post.id === postId);
     if (!postToRender) {
-      console.error('❌ Пост не найден для id:', postId);
       return;
     }
     
@@ -152,10 +150,9 @@ viewPostsButtons.forEach(button => button.addEventListener('click', () => {
     document.getElementById('modal-title').innerText = postToRender.title;
     document.getElementById('modal-body').innerText = postToRender.description ? postToRender.description : '';
     
-    const buttonReadAll = document.getElementById('btn-modal-readAll');
-    buttonReadAll.innerText = i18next.t('buttonReadAll');
-    // Убираем дублирующиеся обработчики – лучше назначить один раз
-    buttonReadAll.onclick = () => window.open(postToRender.link);
+    const readAllLink = document.getElementById('btn-modal-readAll');
+    readAllLink.textContent = i18next.t('buttonReadAll');
+    readAllLink.href = postToRender.link;
     
     document.getElementById('btn-modal-close').innerText = i18next.t('buttonClose');
     postToRender.isVisited = true;
