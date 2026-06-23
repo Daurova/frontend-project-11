@@ -24,4 +24,8 @@ See most active contributors on [hexlet-friends](https://friends.hexlet.io/).
 
 [![Lint Status](https://github.com/(https://github.com/Daurova/frontend-project-11/actions/workflows/lint.yml/badge.svg)](https://github.com/frontend-project-11/actions/workflows/lint.yml)
 
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Daurova_frontend-project-11&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Daurova_frontend-project-11)
+
+
 [Сайт](https://frontend-project-11-lime-three.vercel.app/)
