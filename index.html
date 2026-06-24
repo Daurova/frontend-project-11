@@ -8,14 +8,13 @@
 </head>
 <body>
     <div class="container  bg-second">
-        <div class="">
+        <div class="container-languages">
           <button class="btn btn-sm btn-outline-secondary" id="lang-ru">RU</button>
           <button class="btn btn-sm btn-outline-secondary" id="lang-en">EN</button>
         </div>        
         <h1 id = 'title'></h1>
         <div id = 'slogan'>Начните читать RSS сегодня! Это легко, это красиво.</div>
         <form id="rss-form" novalidate>
-            <div class="mb-3">
                 <input 
                     type="text" 
                     class="form-control" 
@@ -23,17 +22,17 @@
                     aria-label="url"
                     required
                 >
-            </div>
-            <button type="submit" class="btn btn-primary" id = "btn">Добавить</button>
+            <button type="submit" class="btn btn-primary btn-lg" id = "btn">Добавить</button>
         </form>
         <div id = 'example'>Пример: https://lorem-rss.hexlet.app/feed</div>
+        <div id="feedback-container" style="min-height: 2.5rem;"></div>
     <div class="row bg-main font-main container-second">
    
-    <div class="col-md-8">
+    <div class="col-md-6">
       <h2 data-i18n="postsTitle">Посты</h2>
       <div id="posts-container" class = 'posts'></div>
     </div>
-     <div class="col-md-4">
+     <div class="col-md-6">
       <h2 data-i18n="feedsTitle">Фиды</h2>
       <div id="feeds-container" class="font-main feeds"></div>
     </div>

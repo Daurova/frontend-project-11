@@ -14,11 +14,10 @@ const modal = new Modal(document.getElementById('modal'))
 console.log('🔷 view.js загружен');
 
 const renderForm = () => {
-  console.log('🔁 renderForm, isSuccess:', state.form.isSuccess);
-  const existingFeedbacks = urlInput.parentNode.querySelectorAll('.invalid-feedback, .valid-feedback, .success, .feedback');
- console.log('existing feedbacks', existingFeedbacks)
-  existingFeedbacks.forEach(el => el.remove());  
-console.log(existingFeedbacks, 'exising after remove')
+  const feedbackContainer = document.getElementById('feedback-container');
+  if (!feedbackContainer) return;
+
+  feedbackContainer.innerHTML = '';
 
   if (urlInput.value !== state.form.url) {
     urlInput.value = state.form.url;
@@ -26,48 +25,38 @@ console.log(existingFeedbacks, 'exising after remove')
 
   if (!state.form.isValid) {
     urlInput.classList.add('is-invalid');
-    
-    let errorDiv = urlInput.nextElementSibling;
-    if (!errorDiv || !errorDiv.classList.contains('invalid-feedback')) {
-      errorDiv = document.createElement('div');
-      errorDiv.className = 'invalid-feedback feedback';
-      urlInput.parentNode.insertBefore(errorDiv, urlInput.nextSibling);
-    }
+    urlInput.classList.remove('is-valid');
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'invalid-feedback feedback';
     errorDiv.textContent = i18next.t(state.form.errorMessage);
+    feedbackContainer.appendChild(errorDiv);
   } else {
     urlInput.classList.remove('is-invalid');
-    const errorDiv = urlInput.nextElementSibling;
-    if (errorDiv && errorDiv.classList.contains('invalid-feedback')) {
-      errorDiv.remove();
-    }
   }
-  
+
+  if (state.form.isSuccess) {
+    urlInput.classList.add('is-valid');
+    const successDiv = document.createElement('div');
+    successDiv.className = 'valid-feedback feedback';
+    successDiv.textContent = i18next.t('successMessage');
+    feedbackContainer.appendChild(successDiv);
+  } else {
+    urlInput.classList.remove('is-valid');
+  }
+
   if (state.form.isSubmitting) {
     submitButton.disabled = true;
-    submitButton.textContent = i18next.t('buttonLoadingText')
+    submitButton.textContent = i18next.t('buttonLoadingText');
   } else {
     submitButton.disabled = false;
     submitButton.textContent = i18next.t('buttonText');
   }
 
-  if (state.form.isSuccess) {
-
-    // let successDiv = urlInput.nextElementSibling
-   let successDiv = document.createElement('div');
-    successDiv.classList.add('success', 'feedback') 
-    console.log(state.form.isSuccess)
-    urlInput.parentNode.insertBefore(successDiv, urlInput.nextSibling);
-    successDiv.textContent = i18next.t('successMessage')
-
-  }
-
-document.getElementById('title').textContent = i18next.t('title')  
-document.getElementById('slogan').textContent = i18next.t('slogan');
-document.getElementById('example').textContent = i18next.t('example');
-urlInput.placeholder = i18next.t('inputPlaceholder');
+  document.getElementById('title').textContent = i18next.t('title');
+  document.getElementById('slogan').textContent = i18next.t('slogan');
+  document.getElementById('example').textContent = i18next.t('example');
+  urlInput.placeholder = i18next.t('inputPlaceholder');
 };
-
-
 form.addEventListener('submit', (event) => {
   event.preventDefault();
   
@@ -124,8 +113,8 @@ const renderFeedsAndPosts = () => {
  postsContainer.innerHTML = `
   <div role="list" class="list-unstyled">
     ${state.posts.map(post => `
-      <div role="listitem" class="mb-2 d-flex align-items-center gap-2">
-        <a href="${escapeHtml(post.link)}" target="_blank" rel="noopener noreferrer" class="${post.isVisited ? 'fw-normal link-secondary' : 'fw-bold'}">
+      <div role="listitem" class=" post-item">
+        <a href="${escapeHtml(post.link)}" target="_blank" rel="noopener noreferrer" class=" ${post.isVisited ? 'fw-normal link-secondary' : 'fw-bold'}">
           ${escapeHtml(post.title)}
         </a>
         <button class="btn btn-sm btn-outline-primary btn-view-posts" data-post-id="${post.id}">
@@ -162,7 +151,6 @@ viewPostsButtons.forEach(button => button.addEventListener('click', () => {
 
 
 console.log(state.posts[0])
-// Функция для защиты от XSS
 function escapeHtml(str) {
   if (!str) return '';
   return str.replace(/[&<>]/g, function(m) {

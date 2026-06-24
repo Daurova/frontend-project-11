@@ -62,10 +62,16 @@ div {
   filter: drop-shadow(0 0 2em #f7df1eaa);
 }
 
+.container-languages {
+  display: flex;
+  justify-content: flex-start;
+}
+
 form {
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .mb-3 {
@@ -73,21 +79,28 @@ form {
 }
 
 input {
-    padding: 0.6em 1.2em;
+  padding: 0.6em 1.2em;
+  max-width: 80%
 }
 
+#btn {
+  margin-left: 20px;
+  padding: 5px;
+  font-size: medium;
+}
 button {
   border-radius: 8px;
-  border: 1px solid blue;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
+  border: none;
+  margin-right: 5px;
+  /* margin-left: 5px; */
+  font-size: 0.5em;
+  font-weight: 300;
   font-family: inherit;
   background-color: white;
   color: blue;
   cursor: pointer;
   transition: border-color 0.25s;
-  height: auto;
+  height: 40px;
 }
 button:hover {
   border-color: #646cff;
@@ -109,6 +122,17 @@ button:focus-visible {
 
 .is-invalid {
   border-color: #dc3545 !important;
+}
+
+#feedback-container .valid-feedback {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+#feedback-container .invalid-feedback {
+  display: block;
+  margin: 0;
+  padding: 0;
 }
 
 .invalid-feedback {
@@ -147,3 +171,18 @@ button:focus-visible {
   flex-direction: row;
   flex-wrap: nowrap;
 } 
+
+h2{
+  padding-left: 30px
+}
+
+#posts-container {
+  padding-right: 100px;
+}
+
+.post-item {
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
